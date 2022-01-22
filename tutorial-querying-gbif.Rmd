@@ -3,4 +3,60 @@ title: "Querying GBIF data from rstudio.cloud"
 output: pdf_document
 ---
 
+Your Name Here  
+DSCI 245 / RNR 620  
+January 25th, 2022  
+
+## Querying Data from GBIF
+
+
+### Learning Outcomes 
+* Understand (roughly) what an API is.
+* Gain some familiarity with GBIF.
+* Learn how to query data from GBIF with R code.
+* Ask (and answer) some basic questions about your data.
+
+
+### Application Programming Interfaces (API)
+
+Perhaps one of the best things about the internet is the existence of APIs. An API is basically a way to programmatically ask for data from a particular data source, provided you follow their rules (i.e. read their documentation).
+
+A very common way to do this is by asking a question with a URL, and getting a response in some data format (XML, JSON, an image, etc.).
+
+One basic example is the "Dog API" (https://dog.ceo/dog-api/). From reading their documentation, I can ask for a random image of a Cocker Spaniel with this URL:
+
+https://dog.ceo/api/breed/spaniel/cocker/images/random
+
+The response is a JSON (JavaScript Object Notation), which includes the URL of an image of a Cocker Spaniel. Neat!
+
+
+You may be asking "so what?". Well, with the existence of APIs, we can query data sets directly from rstudio.cloud, and then write R code to work with it. This can be a little more efficient than the "download/upload" method we did last week. 
+
+In our case, we're not going to be constructing URLs, but we'll be using an R package called "spocc". spocc has some built-in functions we can use to directly query data from the Global Biodiversity Information Facility (GBIF).
+
+First, let's load the spocc library:
+
+```{r}
+library(spocc)
+
+```
+
+
+### GBIF
+
+
+
+### Using spocc to query GBIF
+
+
+
+
+
+### Looking at your data
+
+
+
+
+
+
 
