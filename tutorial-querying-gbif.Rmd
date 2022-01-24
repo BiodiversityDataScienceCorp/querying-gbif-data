@@ -11,7 +11,6 @@ January 25th, 2022
 
 
 ### Learning Outcomes 
-* Understand (roughly) what an API is.
 * Gain some familiarity with GBIF.
 * Learn how to query data from GBIF with R code.
 * Ask (and answer) some basic questions about your data.
@@ -41,82 +40,78 @@ GBIF (Global Biodiversity Information Facility) "is an international network and
 GBIF also provides an API, so people can programmatically query data with code. Even better, developers at "rOpenSci" have created an R package call spocc (SPecies OCCurrence) that lets you directly query data from within rstudio.cloud.
 
 ### Using spocc to query GBIF
-https://rsh249.github.io/bioinformatics/primary_biodiv.html
 
-First, let's load the spocc library:
+The spocc package has a number of different functions, all of which are documented here: https://docs.ropensci.org/spocc/reference/index.html
+
+One of the primary functions we'll use is "occ()" (for "occurrences"). 
+
+Let's run it and see what happends:
+```{r}
+occ()
+```
+
+Just kidding! It won't work until we load the "spocc" package, using the "library()" function:
+
 
 ```{r}
 library(spocc)
 
 ```
 
-In our case, we're not going to be constructing URLs, but we'll be using an R package called "spocc". spocc has some built-in functions we can use to directly query data from the Global Biodiversity Information Facility (GBIF).
-
-
-
-
-
-
-
-```{r}
-spdist <- occ(query='Danaus plexippus', from='gbif', limit=5000)
-
-gbif<-spdist$gbif
-
-gbif
-
-```
-
-```{r}
-df = as.data.frame(occ2df(spdist$gbif))
-df
-
-az<-dplyr::filter(df, stateProvince=="Arizona")
-az
-
-```
-
-
-
-possible querying problems:
-
-Using:
+Let's take a quick look at the documentation for the "occ()" function:
 https://docs.ropensci.org/spocc/reference/occ.html
-https://anthonylouisdagostino.com/bounding-boxes-for-all-us-states/
 
-Query monarch butterflies in Arizona (hint, use 'geometry' argument)
+Unlike simple functions (remember sqrt() from last time), occ() can take 19 different arguments. Because there are so many, we need to get in the habit of being explicit about our arguments, so R knows which ones we're using.
 
-
-
-
-
-### Looking at your data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Here is a query for the first 1000 occurrences of Danaus plexippus from GBIF:
 
 ```{r}
-library(mapr)
-map_leaflet(az)
+
+# Notice the explicit arguments: query='Danaus plexippus', instead of just 'Danaus plexippus'
+# When using explicit arguments, we must match the argument name from the documentation (query, from, limit, etc.)
+
+monarchs <- occ(query='Danaus plexippus', from='gbif', limit=1000)
+
+monarchs
+
+
+```
+
+So our result initially doesn't look like much, but there's actually a lot in there. It's an "object", meaning it has attributes containing more values. We can dig deeper using the "$" operator.
+
+The output above gives us some hints on how to access it. The rstudio autofill is also really helpful.
+
+```{r}
+monarchsGbif<-monarchs$gbif$data$Danaus_plexippus
+
+monarchsGbif
 ```
 
 
+Questions to consider:
+
+How might you get Monarch data using a source other than gbif?
+
+How might you get Monarch occurrences from gbif just in the state of Arizona?
+
+How might you get Monarch occurrences from gbif in Arizona for just the year 2021?
+
+
+The answers all lie in the documentation (https://docs.ropensci.org/spocc/reference/occ.html). Only by reading the documentation can you understand how to query the exact data you need.
+
+
+YOUR TURN:
+
+Try answering the questions above. Use comments to describe what you're doing.
+
+```{r}
+
+
+
+
+
+
+```
 
 
 
