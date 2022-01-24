@@ -4,7 +4,7 @@ output: pdf_document
 ---
 
 Your Name Here  
-DSCI 245 / RNR 620  
+DSCI 245 / RNR 496B  
 January 25th, 2022  
 
 ## Querying Data from GBIF
@@ -32,7 +32,16 @@ The response is a JSON (JavaScript Object Notation), which includes the URL of a
 
 You may be asking "so what?". Well, with the existence of APIs, we can query data sets directly from rstudio.cloud, and then write R code to work with it. This can be a little more efficient than the "download/upload" method we did last week. 
 
-In our case, we're not going to be constructing URLs, but we'll be using an R package called "spocc". spocc has some built-in functions we can use to directly query data from the Global Biodiversity Information Facility (GBIF).
+
+
+### GBIF
+
+GBIF (Global Biodiversity Information Facility) "is an international network and data infrastructure funded by the world's governments and aimed at providing anyone, anywhere, open access to data about all types of life on Earth." Academics performing research on species distribution can upload their data to GBIF using the "Darwin Core" metadata standard (https://dwc.tdwg.org/). This means that when researchers upload their data, they're all using the same fields. What is the value in doing this?
+
+GBIF also provides an API, so people can programmatically query data with code. Even better, developers at "rOpenSci" have created an R package call spocc (SPecies OCCurrence) that lets you directly query data from within rstudio.cloud.
+
+### Using spocc to query GBIF
+https://rsh249.github.io/bioinformatics/primary_biodiv.html
 
 First, let's load the spocc library:
 
@@ -41,12 +50,41 @@ library(spocc)
 
 ```
 
-
-### GBIF
-
+In our case, we're not going to be constructing URLs, but we'll be using an R package called "spocc". spocc has some built-in functions we can use to directly query data from the Global Biodiversity Information Facility (GBIF).
 
 
-### Using spocc to query GBIF
+
+
+
+
+
+```{r}
+spdist <- occ(query='Danaus plexippus', from='gbif', limit=5000)
+
+gbif<-spdist$gbif
+
+gbif
+
+```
+
+```{r}
+df = as.data.frame(occ2df(spdist$gbif))
+df
+
+az<-dplyr::filter(df, stateProvince=="Arizona")
+az
+
+```
+
+
+
+possible querying problems:
+
+Using:
+https://docs.ropensci.org/spocc/reference/occ.html
+https://anthonylouisdagostino.com/bounding-boxes-for-all-us-states/
+
+Query monarch butterflies in Arizona (hint, use 'geometry' argument)
 
 
 
@@ -54,6 +92,29 @@ library(spocc)
 
 ### Looking at your data
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(mapr)
+map_leaflet(az)
+```
 
 
 
