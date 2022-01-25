@@ -1,4 +1,4 @@
-# Assignment 2 - Querying Data with GBIF
+# DEMO - Querying Data with GBIF
 Demo for Applied Data Science Practicum  
 RNR 496B - Working with Ecological Data in R - University of Arizona  
 DSCI 245 - Applied Data Science Practicum - Lewis & Clark College  
