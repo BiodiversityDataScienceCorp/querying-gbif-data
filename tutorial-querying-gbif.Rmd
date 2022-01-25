@@ -13,7 +13,7 @@ January 25th, 2022
 ### Learning Outcomes 
 * Gain some familiarity with GBIF.
 * Learn how to query data from GBIF with R code.
-* Ask (and answer) some basic questions about your data.
+* Learn how you might use arguments to better target the data you want.
 
 
 ### Application Programming Interfaces (API)
